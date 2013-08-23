@@ -8,6 +8,7 @@ my $command = $ARGV[0];
 my $db_name = $ARGV[1];
 my $db_user = $ARGV[2];
 my $db_pass = $ARGV[3];
+my $dump_name = $ARGV[4];
 
 my $db = DBI->connect(
   "dbi:mysql:" . $db_name
@@ -37,6 +38,19 @@ if($command eq 'backup')
     open my $tableFile, $tableFileName;
 
     my $dumpDir = $path . '/' . time;
+
+    if($dump_name)
+    {
+      $dumpDir = "$path/$dump_name";
+    }
+
+    if(-d $dumpDir)
+    {
+      printf "Dump %s exists. Please choose a different name or remove it.\n"
+        , $dump_name
+      ;
+      exit;
+    }
 
     mkdir $dumpDir;
 
@@ -73,9 +87,15 @@ if($command eq 'backup')
 }
 elsif($command eq 'restore')
 {
-  my $backUpDirName = $path . '/' . $ARGV[4];
+  my $backUpDirName = $path . '/' . $dump_name;
 
   $backUpDirName =~ s/\/+$//;
+
+  if(not -d $backUpDirName or $dump_name eq '')
+  {
+    printf "Dump not found.\n";
+    exit;
+  }
 
   opendir my $backUpDir, $backUpDirName;
 
