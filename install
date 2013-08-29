@@ -1,0 +1,17 @@
+#!/usr/bin/perl
+use strict;
+my $pwd = `pwd`;
+chomp $pwd;
+my $result = system sprintf 'ln -s %s/flashDb.pl /usr/local/bin/flashdb'
+  , $pwd;
+
+if($result)
+{
+  printf "Unexpexted error: %d", $result;
+}
+else
+{
+  printf "Installed successfully. Try running flashdb. (%d)", $result;
+}
+
+print "\n";
