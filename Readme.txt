@@ -4,7 +4,7 @@ Usage: flashdb command db_name db_user db_pass backup_name
 	db_user		- database username
 	db_pass		- database username
 	backup_name	- name of backup to store or restore (optional)
-    (if ommitted, the current unix timestamp will be used)
+      (if ommitted, the current unix timestamp will be used)
 
   Commands:
     backup  - Creates a backup
