@@ -5,7 +5,7 @@ use DBI;
 if(not scalar @ARGV)
 {
   print "Usage: flashdb command db_name db_user db_pass backup_name\n"
-    . "\tcommand\t\t- [backup|restore]\n"
+    . "\tcommand\t\t- [backup|restore|tables]\n"
     . "\tdb_name\t\t- name of the database to use\n"
     . "\tdb_user\t\t- database username\n"
     . "\tdb_pass\t\t- database username\n"
